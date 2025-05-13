@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סוויפט מעבר דירות - שירותי מעבר מקצועיים</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            text-align: right;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 30px;
+            margin-left: 0;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1622372738946-62e02505feb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .service-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .client-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: 15px;
+            margin-right: 0;
+            object-fit: cover;
+        }
+        
+        .client-details h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .client-details p {
+            font-style: normal;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            font-size: 20px;
+            color: var(--secondary-color);
+            margin-left: 15px;
+            margin-right: 0;
+            margin-top: 5px;
+        }
+        
+        .contact-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .contact-text p, .contact-text a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            left: auto;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-col p {
+            margin-bottom: 15px;
+            color: #bdc3c7;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding-right: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-img, .about-content {
+                flex: none;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 0;
+                left: auto;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .about-content h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>סוויפט <span>מעבר דירות</span></h1>
+            </div>
+            <nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#home">בית</a></li>
+                    <li><a href="#services">שירותים</a></li>
+                    <li><a href="#about">אודותינו</a></li>
+                    <li><a href="#testimonials">לקוחות ממליצים</a></li>
+                    <li><a href="#contact">יצירת קשר</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>שירותי מעבר מקצועיים שאפשר לסמוך עליהם</h2>
+                <p>סוויפט מעבר דירות מספקת שירותי מעבר אמינים, יעילים ומשתלמים עבור בתים ועסקים ברחבי הארץ.</p>
+                <a href="#contact" class="btn">קבלו הצעת מחיר חינם</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>השירותים שלנו</h2>
+                <p>אנו מציעים פתרונות מעבר מקיפים המותאמים לצרכים הספציפיים שלכם, כדי להבטיח חווית מעבר נטולת מתחים.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="מעבר דירות">
+                    </div>
+                    <div class="service-content">
+                        <h3>מעבר דירות</h3>
+                        <p>מדירות סטודיו ועד בתים משפחתיים גדולים, אנו מטפלים בכל הרכוש שלכם בזהירות ובדייקנות.</p>
+                        <a href="#contact" class="btn">למידע נוסף</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="מעבר משרדים">
+                    </div>
+                    <div class="service-content">
+                        <h3>מעבר משרדים</h3>
+                        <p>צמצמו זמן השבתה עם שירותי המעבר היעילים שלנו המותאמים לעסקים מכל הגדלים.</p>
+                        <a href="#contact" class="btn">למידע נוסף</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="שירותי אריזה">
+                    </div>
+                    <div class="service-content">
+                        <h3>שירותי אריזה</h3>
+                        <p>הניחו למומחים שלנו לטפל באריזה עם חומרים באיכות גבוהה כדי להבטיח שהפריטים שלכם יגיעו בשלום.</p>
+                        <a href="#contact" class="btn">למידע נוסף</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="אודות סוויפט מעבר דירות">
+                </div>
+                <div class="about-content">
+                    <h2>אודות סוויפט מעבר דירות</h2>
+                    <p>נוסדנו עם מחויבות למצוינות, סוויפט מעבר דירות מסייעת למשפחות ועסקים לעבור בצורה חלקה כבר מעל עשור. צוות המובילים המקצועי שלנו מאומן לטפל ברכוש שלכם במקסימום תשומת לב וזהירות.</p>
+                    <p>אנו מבינים שמעבר דירה יכול להיות מלחיץ, ולכן פיתחנו מערכות ותהליכים כדי להפוך את המעבר שלכם לחלק ככל האפשר. מאריזה זהירה ועד הובלה יעילה, אנחנו איתכם בכל שלב בדרך.</p>
+                    <p>המשימה שלנו היא לספק שירותי מעבר יוצאי דופן במחירים תחרותיים, עם אחריות ללקוח מרוצה.</p>
+                    <a href="#contact" class="btn">צרו קשר</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>מה הלקוחות שלנו אומרים</h2>
+                <p>אל תסמכו רק על המילים שלנו - הקשיבו לחוויות של הלקוחות המרוצים שלנו עם סוויפט מעבר דירות.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"סוויפט מעבר דירות הפכו את המעבר שלנו לקל ביותר. הצוות היה מקצועי, יעיל וטיפל בכל הרכוש שלנו בזהירות. מומלץ בחום!"</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="שרה ג'ונסון">
+                        <div class="client-details">
+                            <h4>שרה ג'ונסון</h4>
+                            <p>בעלת בית</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"השתמשנו בכמה חברות הובלה בעבר, אבל סוויפט היא ללא ספק הטובה ביותר. הם העבירו את כל המשרד שלנו בסוף שבוע אחד ללא זמן השבתה."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="מיכאל צ'ן">
+                        <div class="client-details">
+                            <h4>מיכאל צ'ן</h4>
+                            <p>בעל עסק</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"המובילים הגיעו בזמן, עבדו במהירות והיו מאוד זהירים עם הרהיטים שלנו. המחיר היה הוגן והשירות היה מצוין."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="אמילי רודריגז">
+                        <div class="client-details">
+                            <h4>אמילי רודריגז</h4>
+                            <p>לקוחה</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>יצירת קשר</h2>
+                <p>מוכנים לעבור דירה? צרו קשר עם הצוות שלנו לקבלת הצעת מחיר חינם וללא התחייבות.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>פרטי יצירת קשר</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <h4>כתובת</h4>
+                                <p>רחוב הרב יצחק ניסים ירושלים, ישראל</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="contact-text">
+                                <h4>טלפון</h4>
+                                <p><a href="tel:0532253537">053-225-3537</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-text">
+                                <h4>אימייל</h4>
+                                <p><a href="mailto:contact@swiftmoving.il@gmail.com">contact@swiftmoving.il@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="contact-text">
+                                <h4>שעות פעילות</h4>
+                                <p>ראשון - שישי: 7:00 - 19:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>עקבו אחרינו</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>קבלו הצעת מחיר חינם</h3>
+                 <!-- Contact Form Section (Now Buttons Only) -->
+<div class="contact-form">
+    <h3>קבלו הצעת מחיר חינם</h3>
+    <p>לצורך קבלת הצעת מחיר, אנא צרו קשר איתנו בטלפון או באימייל:</p>
+    <div class="contact-buttons">
+        <a href="tel:0532253537" class="btn">
+            <i class="fas fa-phone-alt"></i> 053-225-3537
+        </a>
+        <a href="tel:0552693060" class="btn">
+            <i class="fas fa-phone-alt"></i> 055-269-3060
+        </a>
+        <a href="mailto:swiftmoving.il@gmail.com" class="btn">
+            <i class="fas fa-envelope"></i> swiftmoving.il@gmail.com
+        </a>
+    </div>
+</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>סוויפט מעבר דירות</h3>
+                    <p>השותף המהימן שלכם לשירותי מעבר דירות ומשרדים. אנו הופכים את המעבר לקל, יעיל ונעים.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>קישורים מהירים</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">בית</a></li>
+                        <li><a href="#services">שירותים</a></li>
+                        <li><a href="#about">אודותינו</a></li>
+                        <li><a href="#testimonials">לקוחות ממליצים</a></li>
+                        <li><a href="#contact">יצירת קשר</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>שירותים</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">מעבר דירות</a></li>
+                        <li><a href="#">מעבר משרדים</a></li>
+                        <li><a href="#">שירותי אריזה</a></li>
+                        <li><a href="#">פתרונות אחסון</a></li>
+                        <li><a href="#">מעבר בין ערים</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>פרטי יצירת קשר</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> רחוב המעבר 123, תל אביב, ישראל</p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:0532253537">053-225-3537</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:@swiftmoving.il@gmail.com">contact@swiftmoving.il@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 חברת סוויפט מעבר דירות. כל הזכויות שמורות.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('show');
+                }
+            });
+        });
+        
+        // Sticky Header on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
